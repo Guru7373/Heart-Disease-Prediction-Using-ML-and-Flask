@@ -1,0 +1,218 @@
+{% extends "material/base.html" %}
+{% block content %}
+<div class="showcase container pink lighten-2">
+    <div class="row">
+        <div class="col 12 m10 offset-ml center">
+            <h2>        Heart Disease Prediction</h2>
+            <p>By Guru, Shashikala, Vinothini and likhitha</p>
+            <a href="{{url_for('index')}}" class="btn btn-small black white-text waves-effect waves-dark">Reset</a>
+            <a href="{{url_for('preview')}}" class="btn btn-small black white-text waves-effect waves-dark">View Dataset</a>
+        </div>
+
+    </div>
+</div>
+<section class="section section-signup">
+        <div class="container">
+          <div class="row">
+           
+            <div class="col s12 m4">
+              <div class="card-panel yellow lighten-4 red-text text-darken-4 z-depth-0">
+                <form action="{{ url_for('analyze')}}" method="POST">
+                
+                <div class="input-field">
+                  <input type="text" id="age" name="age" >
+                    <label for="age">Age</label>
+                  </div>
+                  
+                  <div class="input-field">
+                    <select id="sex" name="sex">
+                      <option value="" disabled selected>Select Gender</option>
+                      <option value="1">Male(1)</option>
+                      <option value="0">Female(0)</option>
+                    </select>
+                    <label for="sex">Select Gender</label>
+                  </div>
+                  
+                  <div class="input-field">
+                    <select id="cp" name="cp">
+                      <option value="" disabled selected>Select ChestPain type</option>
+                      <option value="0">Typical angina(0)</option>
+                      <option value="1">Atypical angina(1)</option>
+                      <option value="2">Non-anginal pain(2)</option>
+                      <option value="3">Asymptomatic(3)</option>
+                    </select>
+                    <label for="cp">Select ChestPain type</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <input type="text" id="trestbps" name="trestbps" >
+                    <label for="trestbps">Resting BP(mm Hg)</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <input type="text" id="chol" name="chol" >
+                    <label for="chol">Cholestrol(mg/dl)</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <select id="fbs" name="fbs">
+                      <option value="" disabled selected>Choose</option>
+                      <option value="1">True(1)</option>
+                      <option value="0">False(0)</option>
+                    </select>
+                    <label for="fbs">Fasting blood sugar( is FBS >120 mg/dl)</label>
+                  </div>
+                  
+                  <div class="input-field">
+                    <select id="restecg" name="restecg">
+                      <option value="" disabled selected>Select</option>
+                      <option value="0">Normal(0)</option>
+                      <option value="1">Having ST-T(1)</option>
+                      <option value="2">Showing probable(2)</option>
+                    </select>
+                    <label for="restecg">Resting ECG measurement</label>
+                  </div>
+                  
+                   <div class="input-field">
+                  <input type="text" id="thalach" name="thalach" >
+                    <label for="thalach">Max Heart rate Achieved</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <select id="exang" name="exang">
+                      <option value="" disabled selected>Select</option>
+                      <option value="1">Yes(1)</option>
+                      <option value="0">No(0)</option>
+                    </select>
+                    <label for="exang">Exercise induced angina</label>
+                  </div>
+                  
+                   <div class="input-field">
+                   <p class="range-field">
+                        <input type="range" id="oldpeak" name="oldpeak" min="0" max="5" value="0" step="0.1" >
+                    <label for="oldpeak">oldpeak</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <select id="slope" name="slope">
+                      <option value="" disabled selected>Select</option>
+                      <option value="0">Nothing(0)</option>
+                      <option value="1">Upsloping(1)</option>
+                      <option value="2">Flat(2)</option>
+                      <option value="3">Downsloping(3)</option>
+                    </select>
+                    <label for="slope">Slope</label>
+                  </div>
+                  
+                  <div class="input-field">
+                   <p class="range-field">
+                        <input type="range" id="ca" name="ca" min="0" max="5" value="0" step="1" >
+                    <label for="ca">No of Major Vessels</label>
+                  </div>
+                  
+                  <div class="input-field">
+                  <select id="thal" name="thal">
+                      <option value="" disabled selected>Select</option>
+                      <option value="1">Normal(1)</option>
+                      <option value="2">Fixed(2)</option>
+                      <option value="3">Reversable(3)</option>
+                    </select>
+                    <label for="thal">Thalassemia</label>
+                  </div>
+                  
+                  <div class="input-field">
+                    <select id="role" name="model_choice">
+                      <option value="" disabled selected>Select Model</option>
+                      <option value="rfmodel">Random Forest</option>
+                      <option value="knnmodel">KNN Model</option>
+                      <option value="svmmodel">SVM Model</option>
+                      <option value="nbmodel">Naive Bayes</option>
+                      <option value="lrmodel">Logistic Regression</option>
+                      <option value="dtmodel">Decision Tree</option>
+                    </select>
+                    <label for="role">Select Algorithm</label>
+                  </div>
+                  <input type="submit" value="Predict" class="btn btn-small black  waves-light btn-extend">
+                  <input type="reset" value="Clear" class="btn btn-small black  waves-light btn-extend">
+                </form>
+              </div>
+            </div>
+            
+             <div class="col s12 m4 offers">
+                     <div class="card-panel cyan lighten-4 grey-text text-darken-4 z-depth-0">
+                         
+                            <p>Age: {{ age }}</p>
+                            <p>Gender: {{ sex }}</p>
+                            <p>ChestPain Type: {{ cp }} </p>
+                            <p>Resting BP: {{ trestbps }}</p>
+                            <p>Cholestrol: {{ chol }}</p>
+                            <p>FBS: {{ fbs }}</p>
+                            <p>Resting ECG: {{ restecg }} </p>
+                            <p>Max Heart rate: {{ thalach }}</p>
+                            <p>Exercise induced angina: {{ exang }} </p>
+                            <p>oldpeak: {{ oldpeak }}</p>
+                            <p>slope: {{ slope }}</p>
+                            <p>No of major vessels: {{ ca }}</p>
+                            <p>Thalassemia: {{ thal}} </p>
+                            Using {{ model_selected }} on {{ sample_data1 }}
+              
+                    </div>
+            </div>
+                     
+          
+    
+            
+    
+             <div class="col s12 m4 offers">
+                <h5>Prediction</h5>
+                  <div class="collection" role="alert">
+                    <p  class="collection-item active purple">Predicted result {{ result_prediction }} </p>
+                </div>       				
+                <div class="card-image waves-effect waves-block waves-light">
+                    
+                      {% if result_prediction == [1] %}
+                        <img src="static/imgs/download.jfif" width="200px" height="200px">
+                        <p>You have heart Disease :( </p>
+                        {% elif result_prediction == [0]  %}
+                          <img src="static/imgs/heart-512x512.png" width="200px" height="200px">
+                          <p>Hurray :) You have an healthy heart :( </p>
+                        {% else %}
+                            <p></p>
+                        
+                
+                       {% endif%}
+                </div>
+              
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      {% endblock%}
+
+      {% block scripts %}
+      {{super()}}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+       <!-- Compiled and minified JavaScript -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+      <!-- <script type="text/javascript">
+           document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('select');
+          var instances = M.FormSelect.init(elems, options);
+        });
+      </script> -->
+      
+      <script>
+          // Or with jQuery
+      
+        $(document).ready(function(){
+          $('select').formSelect();
+        });
+      </script>
+      
+      {% endblock %}
